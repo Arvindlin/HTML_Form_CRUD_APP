@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        .container{
+            {#align-self: center;#}
+            margin: auto;
+            border: 1px solid black;
+            width: 500px;
+            width: 400px;
+            {#align-items: center;#}
+        }
+        .label{
+            margin: 20px 20px 20px 20px;
+
+        }
+        .fname{
+            margin: 10px 20px 5px 50px;
+        }
+        .lname{
+            margin: 10px 10px 5px 23px;
+        }
+        .title{
+            margin: 10px 0px 5px 62px;
+        }
+        .blog{
+            margin: 10px 0px 5px 62px;
+        }
+        .email{
+            margin: 10px 0px 5px 52px;
+        }
+
+         table,td, th,tr{
+            border: solid 1px;
+            align-items: center;
+            margin: 10px 50px 100px 10%;
+         }
+         th{
+             background-color: antiquewhite;
+             }
+         tr{
+             background-color: #ecc4b5;
+         }
+    </style>
+
+<form method="POST" class="container">
+    {% csrf_token %}
+    <br>
+   <div> <label for="firstname" class="label"> Name : </label>
+       <input type="text" name="firstname" value={{ form.firstname }}></div><br>
+    <div><label for="lastname" class="label"> LastName :</label>
+        <input type="text" name="lastname" value={{ form.lastname }}></div><br>
+    <div><label for="blog_title" class="label">Title : </label>
+        <input type="text" name="blog_title" value={{ form.blog_title }}></div><br>
+    <div><label for="email" class="label">Email : </label>
+        <input type="text" name="email" value={{ form.email }}></div><br>
+        <label for="blog" class="label">Blog :</label><br>
+    <center><textarea type="text" name="blog" value={{ from.blog }} cols="30" rows="20"></textarea></center><br>
+    <center><input type="submit" value="OK"></center>
+</form>
+{% endblock %}

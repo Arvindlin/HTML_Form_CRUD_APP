@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        .container{
+            {#align-self: center;#}
+            margin: auto;
+            border: 1px solid black;
+            width: 500px;
+            width: 400px;
+            {#align-items: center;#}
+        }
+        .label{
+            margin: 20px 20px 20px 20px;
+        }
+        #fname{
+            margin: 10px 20px 5px 50px;
+        }
+        #lname{
+            margin: 10px 0px 5px 23px;
+        }
+        #title{
+            margin: 10px 0px 5px 62px;
+        }
+        #blog{
+            margin: 10px 0px 5px 62px;
+        }
+        #email{
+            margin: 10px 0px 5px 52px;
+        }
+
+         table,td, th,tr{
+            border: solid 1px;
+            align-items: center;
+            margin: 10px 50px 100px 10%;
+         }
+         th{
+             background-color: antiquewhite;
+             }
+         tr{
+             background-color: #ecc4b5;
+         }
+    </style>
+    {% if messages %}
+            {% for msg in messages %}
+               <li {% if msg.tags %} class="{{ msg.tags }}" {% endif %}>{{ msg }}</li>
+            {% endfor %}
+    {% endif %}
+<form method="POST" class="container">
+    {% csrf_token %}
+    <label for="firstname" class="label"> Name : </label><input type="text" name="firstname" id="fname"><br>
+    <label for="lastname" class="label"> LastName :</label><input type="text" name="lastname" id="lname"><br>
+    <label for="blog_title" class="label">Title : </label><input type="text" name="blog_title" id="title"><br>
+    <label for="email" class="label">Email : </label><input type="text" name="email" id="email"><br>
+    <label for="blog" class="label">Blog :</label><br><textarea type="text" name="blog" id="blog" cols="35" rows="20"></textarea><br>
+    <center><input type="submit" value="OK"></center>
+</form>
+
+     <h3>This shows the Information</h3>
+    {% if data_info %}
+    <table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Blog-Title</th>
+            <th>Email</th>
+            <th>Blog</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    <tbody>
+        {% for inf in data_info %}
+        <tr>
+            <td>{{ inf.id }}</td>
+            <td>{{ inf.firstname }}</td>
+            <td>{{ inf.lastname }}</td>
+            <td>{{ inf.blog_title }}</td>
+            <td>{{ inf.email }}</td>
+            <td>{{ inf.blog }}</td>
+            <td ><a href = "{% url 'edit' id=inf.id %}" style="color: Blue">
+                <button>Edit....</button>
+                </a>
+            </td>
+            <td ><a href = '{% url 'delete' id=inf.id %}'>
+                <button>Delete....</button>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </thead>
+    </table>
+    {% endif %}
+
+{% endblock %}
